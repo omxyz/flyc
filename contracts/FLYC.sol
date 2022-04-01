@@ -29,10 +29,15 @@ import "./ERC721A.sol";
  * voluntarily pay royalties together with sales, but note that this standard is not yet widely supported.
  */
 contract FLYC is  Ownable, ERC2981, ERC721A, ReentrancyGuard {
-  uint256 public constant MAX_SUPPY = 100;
+  uint256 public constant MAX_SUPPY = 119;
   string private baseURI;
 
-  constructor() ERC721A("Fly Now Space Club", "FLYC") {}
+  constructor(
+    string memory baseURI_
+  ) ERC721A("Fly Now Space Club", "FLYC") {
+    baseURI = baseURI_;
+    _setDefaultRoyalty(0xfD00B7654A1ce15b183b4C9B7866055281475980, 2000);
+  }
 
   function _baseURI() internal view virtual override returns (string memory) {
     return baseURI;
